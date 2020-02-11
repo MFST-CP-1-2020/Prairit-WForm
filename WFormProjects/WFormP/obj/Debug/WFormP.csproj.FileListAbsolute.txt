@@ -1,1 +1,9 @@
 D:\Projects\WFormCP\WFormProjects\WFormP\bin\Debug\WFormP.exe.config
+D:\Projects\WFormCP\WFormProjects\WFormP\obj\Debug\WFormP.csprojResolveAssemblyReference.cache
+D:\Projects\WFormCP\WFormProjects\WFormP\obj\Debug\WFormP.Form1.resources
+D:\Projects\WFormCP\WFormProjects\WFormP\obj\Debug\WFormP.Properties.Resources.resources
+D:\Projects\WFormCP\WFormProjects\WFormP\obj\Debug\WFormP.csproj.GenerateResource.Cache
+D:\Projects\WFormCP\WFormProjects\WFormP\bin\Debug\WFormP.exe
+D:\Projects\WFormCP\WFormProjects\WFormP\bin\Debug\WFormP.pdb
+D:\Projects\WFormCP\WFormProjects\WFormP\obj\Debug\WFormP.exe
+D:\Projects\WFormCP\WFormProjects\WFormP\obj\Debug\WFormP.pdb
