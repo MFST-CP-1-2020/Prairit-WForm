@@ -17,6 +17,8 @@ namespace StudentReg
         DataTable state = new DataTable();
 
         DataTable country = new DataTable();
+
+        int rowIndex, columnIndex;
         public Form1()
         {
             InitializeComponent();
@@ -25,6 +27,9 @@ namespace StudentReg
         private void button1_Click(object sender, EventArgs e)
         {
             bindGrid();
+            clearEntries();
+
+            updateButton.Enabled = true;
         }
 
         void bindGrid()
@@ -32,33 +37,73 @@ namespace StudentReg
 
             DataRow row = tab.NewRow();
 
-            row["Name"] = textBox1.Text;
-            row["PhoneNumber"] = textBox2.Text;
-            row["Country"] = comboBox1.Text;
-            row["State"] = comboBox2.Text;
+            row["Name"] = nameBox.Text;
+            row["PhoneNumber"] = numberBox.Text;
+            row["Country"] = countryBox.Text;
+            row["State"] = stateBox.Text;
             
             row["Gender"] = getRadioValue();
-
 
             tab.Rows.Add(row);
 
             dataGridView1.DataSource = tab;
+
+            addLoadButton();
+
+            addDeleteButton();
+            
+        }
+
+        void addLoadButton()
+        {            
+            DataGridViewButtonColumn ButtonColumn = new DataGridViewButtonColumn();
+            ButtonColumn.Name = "Load column";
+            ButtonColumn.Text = "Load";
+            ButtonColumn.UseColumnTextForButtonValue = true;//display name of button
+            int columnIndex = 0;
+            if (dataGridView1.Columns["Load column"] == null)
+            {
+                dataGridView1.Columns.Insert(columnIndex, ButtonColumn);
+            }
+        }
+
+        void addDeleteButton()
+        {
+            DataGridViewButtonColumn ButtonColumn = new DataGridViewButtonColumn();
+            ButtonColumn.Name = "Delete column";
+            ButtonColumn.Text = "Delete";
+            ButtonColumn.UseColumnTextForButtonValue = true;//display name of button
+            int columnIndex = 0;
+            if (dataGridView1.Columns["Delete column"] == null)
+            {
+                dataGridView1.Columns.Insert(columnIndex, ButtonColumn);
+            }
+        }
+
+        void clearEntries()
+        {
+            nameBox.Text = "";
+            numberBox.Text = "";
+            countryBox.Text = "";
+            stateBox.Text = "";
+            maleButton.Checked = true;
         }
 
         string getRadioValue()
         {
             string value;
-            bool isChecked = radioButton1.Checked;
+            bool isChecked = maleButton.Checked;
             if (isChecked)
-                value = radioButton1.Text;
+                value = maleButton.Text;
             else
-                value = radioButton2.Text;
+                value = femaleButton.Text;
             return value;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             bindControls();
+            clearEntries();
         }
         void bindControls()
         {
@@ -101,9 +146,9 @@ namespace StudentReg
             stateRow["Name"] = "Karnataka";
             state.Rows.Add(stateRow);*/
 
-            comboBox2.DisplayMember = "Name";
-            comboBox2.ValueMember = "id";
-            comboBox2.DataSource = state;
+            stateBox.DisplayMember = "Name";
+            stateBox.ValueMember = "id";
+            stateBox.DataSource = state;
 
 
         }
@@ -141,9 +186,9 @@ namespace StudentReg
             countryRow["Name"] = "Myanmar";
             country.Rows.Add(countryRow);*/
 
-            comboBox1.DisplayMember = "Name";
-            comboBox1.ValueMember = "id";
-            comboBox1.DataSource = country;
+            countryBox.DisplayMember = "Name";
+            countryBox.ValueMember = "id";
+            countryBox.DataSource = country;
             
         }
 
@@ -165,11 +210,51 @@ namespace StudentReg
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
 
+            rowIndex = e.RowIndex;
+            columnIndex = e.ColumnIndex;
+
+            DataGridViewRow row = dataGridView1.Rows[rowIndex];
+            if (columnIndex == 1)
+            {
+                nameBox.Text = row.Cells["Name"].Value.ToString();
+                numberBox.Text = row.Cells["PhoneNumber"].Value.ToString();
+                stateBox.Text = row.Cells["State"].Value.ToString();
+                countryBox.Text = row.Cells["Country"].Value.ToString();
+
+                if(row.Cells["Gender"].Value.ToString()=="Male")
+                {
+                    maleButton.Checked = true;
+                }
+                else
+                {
+                    femaleButton.Checked = true;
+                }
+            }
+
+            else if(columnIndex == 0)
+            {
+                dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+            }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
+            
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            tab.Rows[rowIndex]["Name"] = nameBox.Text;
+            tab.Rows[rowIndex]["PhoneNumber"] = numberBox.Text;
+            tab.Rows[rowIndex]["Country"] = countryBox.Text;
+            tab.Rows[rowIndex]["State"] = stateBox.Text;
+
+            //string radioValue = getRadioValue();
+            //MessageBox.Show(radioValue);
+
+            tab.Rows[rowIndex]["Gender"] = getRadioValue();
 
         }
     }

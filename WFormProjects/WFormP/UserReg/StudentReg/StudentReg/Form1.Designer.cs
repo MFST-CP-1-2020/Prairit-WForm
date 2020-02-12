@@ -29,19 +29,20 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.nameBox = new System.Windows.Forms.TextBox();
+            this.submitButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.maleButton = new System.Windows.Forms.RadioButton();
+            this.femaleButton = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.numberBox = new System.Windows.Forms.TextBox();
+            this.countryBox = new System.Windows.Forms.ComboBox();
+            this.stateBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.updateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,25 +55,26 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name";
             // 
-            // textBox1
+            // nameBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(166, 53);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(198, 22);
-            this.textBox1.TabIndex = 1;
+            this.nameBox.Location = new System.Drawing.Point(166, 53);
+            this.nameBox.Name = "nameBox";
+            this.nameBox.Size = new System.Drawing.Size(198, 22);
+            this.nameBox.TabIndex = 1;
             // 
-            // button1
+            // submitButton
             // 
-            this.button1.Location = new System.Drawing.Point(44, 419);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(320, 41);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Submit";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.submitButton.Location = new System.Drawing.Point(44, 419);
+            this.submitButton.Name = "submitButton";
+            this.submitButton.Size = new System.Drawing.Size(149, 41);
+            this.submitButton.TabIndex = 2;
+            this.submitButton.Text = "Submit";
+            this.submitButton.UseVisualStyleBackColor = true;
+            this.submitButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.SlateGray;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(405, 53);
             this.dataGridView1.Name = "dataGridView1";
@@ -109,29 +111,28 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "State";
             // 
-            // radioButton1
+            // maleButton
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(166, 133);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(59, 21);
-            this.radioButton1.TabIndex = 7;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Male";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.maleButton.AutoSize = true;
+            this.maleButton.Checked = true;
+            this.maleButton.Location = new System.Drawing.Point(166, 133);
+            this.maleButton.Name = "maleButton";
+            this.maleButton.Size = new System.Drawing.Size(59, 21);
+            this.maleButton.TabIndex = 7;
+            this.maleButton.TabStop = true;
+            this.maleButton.Text = "Male";
+            this.maleButton.UseVisualStyleBackColor = true;
+            this.maleButton.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
-            // radioButton2
+            // femaleButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(291, 133);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(75, 21);
-            this.radioButton2.TabIndex = 8;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Female";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.femaleButton.AutoSize = true;
+            this.femaleButton.Location = new System.Drawing.Point(291, 133);
+            this.femaleButton.Name = "femaleButton";
+            this.femaleButton.Size = new System.Drawing.Size(75, 21);
+            this.femaleButton.TabIndex = 8;
+            this.femaleButton.Text = "Female";
+            this.femaleButton.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -142,28 +143,28 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Phone Number";
             // 
-            // textBox2
+            // numberBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(166, 196);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(198, 22);
-            this.textBox2.TabIndex = 10;
+            this.numberBox.Location = new System.Drawing.Point(166, 196);
+            this.numberBox.Name = "numberBox";
+            this.numberBox.Size = new System.Drawing.Size(198, 22);
+            this.numberBox.TabIndex = 10;
             // 
-            // comboBox1
+            // countryBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(166, 260);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(198, 24);
-            this.comboBox1.TabIndex = 11;
+            this.countryBox.FormattingEnabled = true;
+            this.countryBox.Location = new System.Drawing.Point(166, 260);
+            this.countryBox.Name = "countryBox";
+            this.countryBox.Size = new System.Drawing.Size(198, 24);
+            this.countryBox.TabIndex = 11;
             // 
-            // comboBox2
+            // stateBox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(166, 327);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(198, 24);
-            this.comboBox2.TabIndex = 12;
+            this.stateBox.FormattingEnabled = true;
+            this.stateBox.Location = new System.Drawing.Point(166, 327);
+            this.stateBox.Name = "stateBox";
+            this.stateBox.Size = new System.Drawing.Size(198, 24);
+            this.stateBox.TabIndex = 12;
             // 
             // label6
             // 
@@ -175,24 +176,36 @@
             this.label6.TabIndex = 13;
             this.label6.Text = "Registration Form";
             // 
+            // updateButton
+            // 
+            this.updateButton.Enabled = false;
+            this.updateButton.Location = new System.Drawing.Point(222, 419);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(142, 40);
+            this.updateButton.TabIndex = 14;
+            this.updateButton.Text = "Update";
+            this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1010, 533);
+            this.Controls.Add(this.updateButton);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.stateBox);
+            this.Controls.Add(this.countryBox);
+            this.Controls.Add(this.numberBox);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.femaleButton);
+            this.Controls.Add(this.maleButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.submitButton);
+            this.Controls.Add(this.nameBox);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Registration Form";
@@ -206,19 +219,20 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox nameBox;
+        private System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton maleButton;
+        private System.Windows.Forms.RadioButton femaleButton;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox numberBox;
+        private System.Windows.Forms.ComboBox countryBox;
+        private System.Windows.Forms.ComboBox stateBox;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button updateButton;
     }
 }
 
