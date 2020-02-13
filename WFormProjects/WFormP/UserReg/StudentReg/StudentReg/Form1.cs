@@ -48,13 +48,15 @@ namespace StudentReg
             row["Name"] = nameBox.Text;//reading data from data fields
             row["Country"] = countryBox.Text;//reading data from data fields
             row["State"] = stateBox.Text;//reading data from data fields
-            try//handling of exception for an incorrect input
+            try//handling of exception for an incorrect input format
             {
                 row["PhoneNumber"] = numberBox.Text;
             }
             catch(Exception)
             {
-                MessageBox.Show("Number should be an integer");
+                MessageBox.Show("Input should be an integer");
+                row["PhoneNumber"] = 0;
+
             }
 
             row["Gender"] = getRadioValue();//getting the value of the radio button
@@ -145,7 +147,7 @@ namespace StudentReg
         {
             user.Columns.Add("Name", typeof(string));//adding columns to the user datatable
             user.Columns.Add("Gender", typeof(string));//adding columns to the user datatable
-            user.Columns.Add("PhoneNumber", typeof(int));//adding columns to the user datatable
+            user.Columns.Add("PhoneNumber", typeof(long));//adding columns to the user datatable
             user.Columns.Add("Country", typeof(string));//adding columns to the user datatable
             user.Columns.Add("State", typeof(string));//adding columns to the user datatable
         }
@@ -211,6 +213,7 @@ namespace StudentReg
                     break;
             }
         }
+
         /*this function will be called at form's loading to add columns to the state datatable*/
         void addColumnsToState()
         {
@@ -251,10 +254,10 @@ namespace StudentReg
             country.Columns.Add("id", typeof(int));//adding columns to the datatable of the country
             country.Columns.Add("Name", typeof(string));//adding columns to the datatable of the country
 
-            country.Rows.Add(1, "India");//adding countries to the state datatable
-            country.Rows.Add(2, "Bhutan");
-            country.Rows.Add(3, "Nepal");
-            country.Rows.Add(4, "Myanmar");
+            country.Rows.Add(0, "India");//adding countries to the state datatable
+            country.Rows.Add(1, "Bhutan");
+            country.Rows.Add(2, "Nepal");
+            country.Rows.Add(3, "Myanmar");
 
         }
 
@@ -271,8 +274,10 @@ namespace StudentReg
             {
                 nameBox.Text = row.Cells["Name"].Value.ToString();//setting the values to data fields
                 numberBox.Text = row.Cells["PhoneNumber"].Value.ToString();//setting the values to data fields
-                stateBox.Text = row.Cells["State"].Value.ToString();//setting the values to data fields
                 countryBox.Text = row.Cells["Country"].Value.ToString();//setting the values to data fields
+                bindState();//calling the function to bind states when load button is clicked
+
+                stateBox.Text = row.Cells["State"].Value.ToString();//setting the values to data fields
 
                 if (row.Cells["Gender"].Value.ToString()=="Male")//conditions for setting the values of radiobuttons 
                 {
@@ -284,7 +289,7 @@ namespace StudentReg
                 }
 
                 updateButton.Enabled = true;//enabling the update button
-                bindState();//calling the function to bind states when load button is clicked
+                //bindState();//calling the function to bind states when load button is clicked
             }
 
             else if(columnIndex == 0)//if the delete button is clicked
@@ -297,7 +302,6 @@ namespace StudentReg
         private void countryBox_DropDownClosed(object sender, EventArgs e)
         {
             bindState();//state is binded according to the selected country index
-
         }
 
 
