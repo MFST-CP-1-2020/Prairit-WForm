@@ -79,7 +79,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(405, 53);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(593, 407);
+            this.dataGridView1.Size = new System.Drawing.Size(754, 407);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -91,7 +91,6 @@
             this.label2.Size = new System.Drawing.Size(56, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = "Gender";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -122,7 +121,6 @@
             this.maleButton.TabStop = true;
             this.maleButton.Text = "Male";
             this.maleButton.UseVisualStyleBackColor = true;
-            this.maleButton.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // femaleButton
             // 
@@ -157,6 +155,7 @@
             this.countryBox.Name = "countryBox";
             this.countryBox.Size = new System.Drawing.Size(198, 24);
             this.countryBox.TabIndex = 11;
+            this.countryBox.DropDownClosed += new System.EventHandler(this.countryBox_DropDownClosed);
             // 
             // stateBox
             // 
@@ -169,10 +168,10 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.label6.Location = new System.Drawing.Point(400, 9);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(164, 25);
+            this.label6.Size = new System.Drawing.Size(185, 26);
             this.label6.TabIndex = 13;
             this.label6.Text = "Registration Form";
             // 
@@ -191,7 +190,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1010, 533);
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.ClientSize = new System.Drawing.Size(1201, 533);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.stateBox);

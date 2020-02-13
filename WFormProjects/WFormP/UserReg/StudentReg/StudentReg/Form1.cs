@@ -12,122 +12,148 @@ namespace StudentReg
 {
     public partial class Form1 : Form
     {
-        DataTable tab = new DataTable();
+        DataTable user = new DataTable();//user's datatable
 
-        DataTable state = new DataTable();
+        DataTable state = new DataTable();//state's datatable
 
-        DataTable country = new DataTable();
+        DataTable country = new DataTable();//country's datatable
 
         int rowIndex, columnIndex;
+        
+        /*constructor to initialize the windows form*/
         public Form1()
         {
             InitializeComponent();
         }
 
+        /*
+          this function will be called upon submit button click     
+             */
+
         private void button1_Click(object sender, EventArgs e)
         {
-            bindGrid();
-            clearEntries();
+            bindGrid();//this function call will bind the grid
+            clearEntries();//this function call will reset the values of the fields in form
+            state.Clear();//emptying the datatable of state
 
-            updateButton.Enabled = true;
         }
 
+        /*this function will bind the data grid view with the datatable of user
+         */
         void bindGrid()
         {
 
-            DataRow row = tab.NewRow();
+            DataRow row = user.NewRow();//new row is added for insertion into datatable
 
-            row["Name"] = nameBox.Text;
-            row["PhoneNumber"] = numberBox.Text;
-            row["Country"] = countryBox.Text;
-            row["State"] = stateBox.Text;
-            
-            row["Gender"] = getRadioValue();
+            row["Name"] = nameBox.Text;//reading data from data fields
+            row["Country"] = countryBox.Text;//reading data from data fields
+            row["State"] = stateBox.Text;//reading data from data fields
+            try//handling of exception for an incorrect input
+            {
+                row["PhoneNumber"] = numberBox.Text;
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Number should be an integer");
+            }
 
-            tab.Rows.Add(row);
+            row["Gender"] = getRadioValue();//getting the value of the radio button
 
-            dataGridView1.DataSource = tab;
+            user.Rows.Add(row);//adding the row to the user datatable
 
-            addLoadButton();
+            dataGridView1.DataSource = user;//binding the datatable to the 
 
-            addDeleteButton();
+            addLoadButton();//load button will be added to the grid
+
+            addDeleteButton();//delete button will be added to the grid
             
         }
-
+        /*this function will create a new column for load button*/
         void addLoadButton()
         {            
-            DataGridViewButtonColumn ButtonColumn = new DataGridViewButtonColumn();
-            ButtonColumn.Name = "Load column";
-            ButtonColumn.Text = "Load";
+            DataGridViewButtonColumn ButtonColumn = new DataGridViewButtonColumn();//new datagrid buttoncolumn is defined
+            ButtonColumn.Name = "Load column";//attributes of the button are set
+            ButtonColumn.Text = "Load";//attributes of the button are set
             ButtonColumn.UseColumnTextForButtonValue = true;//display name of button
-            int columnIndex = 0;
-            if (dataGridView1.Columns["Load column"] == null)
+            //int columnIndex = 0;//
+            if (dataGridView1.Columns["Load column"] == null)//checking if the column already exists
             {
-                dataGridView1.Columns.Insert(columnIndex, ButtonColumn);
+                dataGridView1.Columns.Insert(0, ButtonColumn);//inserting the column
             }
         }
 
+        /*this function will create a new column for delete button*/
         void addDeleteButton()
         {
-            DataGridViewButtonColumn ButtonColumn = new DataGridViewButtonColumn();
-            ButtonColumn.Name = "Delete column";
-            ButtonColumn.Text = "Delete";
+            DataGridViewButtonColumn ButtonColumn = new DataGridViewButtonColumn();//new datagrid buttoncolumn is defined
+            ButtonColumn.Name = "Delete column";//attributes of the button are set
+            ButtonColumn.Text = "Delete";//attributes of the button are set
             ButtonColumn.UseColumnTextForButtonValue = true;//display name of button
-            int columnIndex = 0;
-            if (dataGridView1.Columns["Delete column"] == null)
+            //int columnIndex = 0;
+            if (dataGridView1.Columns["Delete column"] == null)//checking if the column already exists
             {
-                dataGridView1.Columns.Insert(columnIndex, ButtonColumn);
+                dataGridView1.Columns.Insert(0, ButtonColumn);//inserting the column
             }
         }
 
+        /*this function will empty the data values of the inputs*/
         void clearEntries()
         {
-            nameBox.Text = "";
-            numberBox.Text = "";
-            countryBox.Text = "";
-            stateBox.Text = "";
-            maleButton.Checked = true;
+            nameBox.Text = "";//reseting the field value
+            numberBox.Text = "";//reseting the field value
+            countryBox.Text = "";//reseting the field value
+            stateBox.Text = "";//reseting the field value
+            maleButton.Checked = true;//reseting the field value
         }
 
+        /*this function will get the values from the radiobuttons and convert to string*/
         string getRadioValue()
         {
             string value;
-            bool isChecked = maleButton.Checked;
-            if (isChecked)
+            bool isChecked = maleButton.Checked;//reading the bool value from radiobutton
+            if (isChecked)//setting the value of the string if con
                 value = maleButton.Text;
-            else
+            else//setting the value of the string if condition is satisfied
                 value = femaleButton.Text;
             return value;
         }
 
+        /*this function will be called upon the form's loading*/
         private void Form1_Load(object sender, EventArgs e)
         {
             bindControls();
             clearEntries();
         }
+
+        /*this function will bind the combobox as well as create the data grid view*/
         void bindControls()
         {
             bindComboBox();
             createGrid();
         }
 
+        /*this function will bind the countries to the combobox*/
         void bindComboBox()
         {
-            bindState();
+            //bindState();
+            addColumnsToState();
             bindCountry();
         }
 
+        /*this function will create a new column for load button*/
         void createGrid()
         {
-            tab.Columns.Add("Name", typeof(string));
-            tab.Columns.Add("Gender", typeof(string));
-            tab.Columns.Add("PhoneNumber", typeof(int));
-            tab.Columns.Add("Country", typeof(string));
-            tab.Columns.Add("State", typeof(string));
+            user.Columns.Add("Name", typeof(string));//adding columns to the user datatable
+            user.Columns.Add("Gender", typeof(string));//adding columns to the user datatable
+            user.Columns.Add("PhoneNumber", typeof(int));//adding columns to the user datatable
+            user.Columns.Add("Country", typeof(string));//adding columns to the user datatable
+            user.Columns.Add("State", typeof(string));//adding columns to the user datatable
         }
 
+        /*this function bind the states to the combobox*/
         void bindState()
         {
+            state.Clear();//data entries in the datatable are cleared
             getState();
 
             /*
@@ -146,26 +172,53 @@ namespace StudentReg
             stateRow["Name"] = "Karnataka";
             state.Rows.Add(stateRow);*/
 
-            stateBox.DisplayMember = "Name";
-            stateBox.ValueMember = "id";
-            stateBox.DataSource = state;
+            stateBox.DisplayMember = "Name";//setting the display members of state's combobox
+            stateBox.ValueMember = "id";//setting the value members of state's combobox
+            stateBox.DataSource = state;//binding the state combobox to the datasource
 
 
         }
 
+        /*this function will add the states to the state datatable*/
         void getState()
         {
-
-            state.Columns.Add("id", typeof(int));
-            state.Columns.Add("Name", typeof(string));
-
-            state.Rows.Add(1, "Uttar Pradesh");
-            state.Rows.Add(2, "Haryana");
-            state.Rows.Add(3, "Punjab");
-            state.Rows.Add(4, "Karnataka");
-
+            //addColumnsToState();
+            int index = countryBox.SelectedIndex;//reading the selected index
+            switch (index)//switching on the value of index
+            {
+                case 0: state.Rows.Add(1, "Uttar Pradesh");//if the selected option is india
+                        state.Rows.Add(2, "Haryana");
+                        state.Rows.Add(3, "Punjab");
+                        state.Rows.Add(4, "Karnataka");
+                    break;
+                case 1:
+                    state.Rows.Add(1, "Bumthang");//if the selected option is bhutan
+                    state.Rows.Add(2, "Trongsa");
+                    state.Rows.Add(3, "Punakha");
+                    state.Rows.Add(4, "Thimphu");
+                    break;
+                case 2:
+                    state.Rows.Add(1, "Uarun Kshetra");//if the selected option is nepal
+                    state.Rows.Add(2, "Janakpur Kshetra");
+                    state.Rows.Add(3, "Kathmandu Kshetra");
+                    state.Rows.Add(4, "Gandak Kshetra");
+                    break;
+                case 3:
+                    state.Rows.Add(1, "Kachin");//if the selected option is myanmar
+                    state.Rows.Add(2, "Kayah");
+                    state.Rows.Add(3, "Kayin");
+                    state.Rows.Add(4, "Chin");
+                    break;
+            }
+        }
+        /*this function will be called at form's loading to add columns to the state datatable*/
+        void addColumnsToState()
+        {
+                state.Columns.Add("id", typeof(int));
+                state.Columns.Add("Name", typeof(string));
         }
 
+        /*this function will bind the country datatable to the combobox*/
         void bindCountry()
         {
             getCountry();
@@ -186,44 +239,42 @@ namespace StudentReg
             countryRow["Name"] = "Myanmar";
             country.Rows.Add(countryRow);*/
 
-            countryBox.DisplayMember = "Name";
-            countryBox.ValueMember = "id";
-            countryBox.DataSource = country;
+            countryBox.DisplayMember = "Name";//setting the display members of the country combobox
+            countryBox.ValueMember = "id";//setting the value members of the country combobox
+            countryBox.DataSource = country;//binding the datasource of countrybox to country
             
         }
 
+        /*this function will add the names of the countries to the datatable*/
         void getCountry()
         {
-            country.Columns.Add("id", typeof(int));
-            country.Columns.Add("Name", typeof(string));
+            country.Columns.Add("id", typeof(int));//adding columns to the datatable of the country
+            country.Columns.Add("Name", typeof(string));//adding columns to the datatable of the country
 
-            country.Rows.Add(1, "India");
+            country.Rows.Add(1, "India");//adding countries to the state datatable
             country.Rows.Add(2, "Bhutan");
             country.Rows.Add(3, "Nepal");
             country.Rows.Add(4, "Myanmar");
 
         }
-        private void label2_Click(object sender, EventArgs e)
-        {
 
-        }
-
+        /*this function will be triggered when a cell is clicked*/
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             //dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
 
-            rowIndex = e.RowIndex;
-            columnIndex = e.ColumnIndex;
+            rowIndex = e.RowIndex;//store the row index of the clicked cell
+            columnIndex = e.ColumnIndex;//store the column index of the clicked cell
 
-            DataGridViewRow row = dataGridView1.Rows[rowIndex];
-            if (columnIndex == 1)
+            DataGridViewRow row = dataGridView1.Rows[rowIndex];//the row is accessed to read values
+            if (columnIndex == 1)//if the load button is clicked
             {
-                nameBox.Text = row.Cells["Name"].Value.ToString();
-                numberBox.Text = row.Cells["PhoneNumber"].Value.ToString();
-                stateBox.Text = row.Cells["State"].Value.ToString();
-                countryBox.Text = row.Cells["Country"].Value.ToString();
+                nameBox.Text = row.Cells["Name"].Value.ToString();//setting the values to data fields
+                numberBox.Text = row.Cells["PhoneNumber"].Value.ToString();//setting the values to data fields
+                stateBox.Text = row.Cells["State"].Value.ToString();//setting the values to data fields
+                countryBox.Text = row.Cells["Country"].Value.ToString();//setting the values to data fields
 
-                if(row.Cells["Gender"].Value.ToString()=="Male")
+                if (row.Cells["Gender"].Value.ToString()=="Male")//conditions for setting the values of radiobuttons 
                 {
                     maleButton.Checked = true;
                 }
@@ -231,30 +282,40 @@ namespace StudentReg
                 {
                     femaleButton.Checked = true;
                 }
+
+                updateButton.Enabled = true;//enabling the update button
+                bindState();//calling the function to bind states when load button is clicked
             }
 
-            else if(columnIndex == 0)
+            else if(columnIndex == 0)//if the delete button is clicked
             {
-                dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+                dataGridView1.Rows.RemoveAt(rowIndex);//delete the current rowdataGridView1.CurrentRow.Index
             }
         }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        
+        /*this function will be triggered when a a value in the combobox is selected*/
+        private void countryBox_DropDownClosed(object sender, EventArgs e)
         {
-            
+            bindState();//state is binded according to the selected country index
+
         }
 
+
+        /*this function will be triggered when the update button is clicked*/
         private void updateButton_Click(object sender, EventArgs e)
         {
-            tab.Rows[rowIndex]["Name"] = nameBox.Text;
-            tab.Rows[rowIndex]["PhoneNumber"] = numberBox.Text;
-            tab.Rows[rowIndex]["Country"] = countryBox.Text;
-            tab.Rows[rowIndex]["State"] = stateBox.Text;
+            //the values from the updated data fields are inserted back into the datagrid
+            user.Rows[rowIndex]["Name"] = nameBox.Text;
+            user.Rows[rowIndex]["PhoneNumber"] = numberBox.Text;
+            user.Rows[rowIndex]["Country"] = countryBox.Text;
+            user.Rows[rowIndex]["State"] = stateBox.Text;
 
             //string radioValue = getRadioValue();
             //MessageBox.Show(radioValue);
 
-            tab.Rows[rowIndex]["Gender"] = getRadioValue();
+            user.Rows[rowIndex]["Gender"] = getRadioValue();//function is called to set the values at given rowindex
+            state.Clear();//clearing the content of the 
+            updateButton.Enabled = false;//disabling the update button again
 
         }
     }
