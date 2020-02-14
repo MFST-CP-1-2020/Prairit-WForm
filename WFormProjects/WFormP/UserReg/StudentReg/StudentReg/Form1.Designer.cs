@@ -43,13 +43,17 @@
             this.stateBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.updateButton = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.emailBox = new System.Windows.Forms.TextBox();
+            this.locBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 58);
+            this.label1.Location = new System.Drawing.Point(42, 80);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 17);
             this.label1.TabIndex = 0;
@@ -57,14 +61,14 @@
             // 
             // nameBox
             // 
-            this.nameBox.Location = new System.Drawing.Point(166, 53);
+            this.nameBox.Location = new System.Drawing.Point(166, 80);
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(198, 22);
             this.nameBox.TabIndex = 1;
             // 
             // submitButton
             // 
-            this.submitButton.Location = new System.Drawing.Point(44, 419);
+            this.submitButton.Location = new System.Drawing.Point(41, 562);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(149, 41);
             this.submitButton.TabIndex = 2;
@@ -76,17 +80,17 @@
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.Color.SlateGray;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(405, 53);
+            this.dataGridView1.Location = new System.Drawing.Point(405, 80);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(754, 407);
+            this.dataGridView1.Size = new System.Drawing.Size(945, 523);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 133);
+            this.label2.Location = new System.Drawing.Point(41, 149);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 17);
             this.label2.TabIndex = 4;
@@ -95,7 +99,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 260);
+            this.label3.Location = new System.Drawing.Point(41, 355);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 17);
             this.label3.TabIndex = 5;
@@ -104,7 +108,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(38, 327);
+            this.label4.Location = new System.Drawing.Point(45, 425);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 17);
             this.label4.TabIndex = 6;
@@ -114,7 +118,7 @@
             // 
             this.maleButton.AutoSize = true;
             this.maleButton.Checked = true;
-            this.maleButton.Location = new System.Drawing.Point(166, 133);
+            this.maleButton.Location = new System.Drawing.Point(166, 147);
             this.maleButton.Name = "maleButton";
             this.maleButton.Size = new System.Drawing.Size(59, 21);
             this.maleButton.TabIndex = 7;
@@ -125,7 +129,7 @@
             // femaleButton
             // 
             this.femaleButton.AutoSize = true;
-            this.femaleButton.Location = new System.Drawing.Point(291, 133);
+            this.femaleButton.Location = new System.Drawing.Point(291, 147);
             this.femaleButton.Name = "femaleButton";
             this.femaleButton.Size = new System.Drawing.Size(75, 21);
             this.femaleButton.TabIndex = 8;
@@ -135,7 +139,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(38, 196);
+            this.label5.Location = new System.Drawing.Point(38, 211);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(103, 17);
             this.label5.TabIndex = 9;
@@ -143,7 +147,7 @@
             // 
             // numberBox
             // 
-            this.numberBox.Location = new System.Drawing.Point(166, 196);
+            this.numberBox.Location = new System.Drawing.Point(166, 206);
             this.numberBox.Name = "numberBox";
             this.numberBox.Size = new System.Drawing.Size(198, 22);
             this.numberBox.TabIndex = 10;
@@ -151,7 +155,7 @@
             // countryBox
             // 
             this.countryBox.FormattingEnabled = true;
-            this.countryBox.Location = new System.Drawing.Point(166, 260);
+            this.countryBox.Location = new System.Drawing.Point(168, 355);
             this.countryBox.Name = "countryBox";
             this.countryBox.Size = new System.Drawing.Size(198, 24);
             this.countryBox.TabIndex = 11;
@@ -160,7 +164,7 @@
             // stateBox
             // 
             this.stateBox.FormattingEnabled = true;
-            this.stateBox.Location = new System.Drawing.Point(166, 327);
+            this.stateBox.Location = new System.Drawing.Point(166, 425);
             this.stateBox.Name = "stateBox";
             this.stateBox.Size = new System.Drawing.Size(198, 24);
             this.stateBox.TabIndex = 12;
@@ -168,17 +172,17 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.label6.Location = new System.Drawing.Point(400, 9);
+            this.label6.Font = new System.Drawing.Font("Calibri", 24F);
+            this.label6.Location = new System.Drawing.Point(398, 19);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(185, 26);
+            this.label6.Size = new System.Drawing.Size(309, 49);
             this.label6.TabIndex = 13;
             this.label6.Text = "Registration Form";
             // 
             // updateButton
             // 
             this.updateButton.Enabled = false;
-            this.updateButton.Location = new System.Drawing.Point(222, 419);
+            this.updateButton.Location = new System.Drawing.Point(224, 563);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(142, 40);
             this.updateButton.TabIndex = 14;
@@ -186,12 +190,48 @@
             this.updateButton.UseVisualStyleBackColor = true;
             this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(42, 500);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(56, 17);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Locality";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(38, 281);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(59, 17);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Email ID";
+            // 
+            // emailBox
+            // 
+            this.emailBox.Location = new System.Drawing.Point(166, 281);
+            this.emailBox.Name = "emailBox";
+            this.emailBox.Size = new System.Drawing.Size(198, 22);
+            this.emailBox.TabIndex = 17;
+            // 
+            // locBox
+            // 
+            this.locBox.Location = new System.Drawing.Point(168, 500);
+            this.locBox.Name = "locBox";
+            this.locBox.Size = new System.Drawing.Size(198, 22);
+            this.locBox.TabIndex = 18;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1201, 533);
+            this.ClientSize = new System.Drawing.Size(1362, 667);
+            this.Controls.Add(this.locBox);
+            this.Controls.Add(this.emailBox);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.stateBox);
@@ -233,6 +273,10 @@
         private System.Windows.Forms.ComboBox stateBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button updateButton;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox emailBox;
+        private System.Windows.Forms.TextBox locBox;
     }
 }
 

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace StudentReg
 {
+    
     public partial class Form1 : Form
     {
         DataTable user = new DataTable();//user's datatable
@@ -33,6 +34,7 @@ namespace StudentReg
         private void button1_Click(object sender, EventArgs e)
         {
             bindGrid();//this function call will bind the grid
+            
             clearEntries();//this function call will reset the values of the fields in form
             state.Clear();//emptying the datatable of state
 
@@ -48,6 +50,8 @@ namespace StudentReg
             row["Name"] = nameBox.Text;//reading data from data fields
             row["Country"] = countryBox.Text;//reading data from data fields
             row["State"] = stateBox.Text;//reading data from data fields
+            row["EmailID"] = emailBox.Text;//reading data from data fields
+            row["Locality"] = locBox.Text;//reading data from data fields
             try//handling of exception for an incorrect input format
             {
                 row["PhoneNumber"] = numberBox.Text;
@@ -56,7 +60,6 @@ namespace StudentReg
             {
                 MessageBox.Show("Input should be an integer");
                 row["PhoneNumber"] = 0;
-
             }
 
             row["Gender"] = getRadioValue();//getting the value of the radio button
@@ -101,10 +104,12 @@ namespace StudentReg
         /*this function will empty the data values of the inputs*/
         void clearEntries()
         {
-            nameBox.Text = "";//reseting the field value
-            numberBox.Text = "";//reseting the field value
-            countryBox.Text = "";//reseting the field value
-            stateBox.Text = "";//reseting the field value
+            nameBox.Clear();//reseting the field value
+            numberBox.Clear();//reseting the field value
+            emailBox.Clear();//reseting the field value
+            locBox.Clear();//reseting the field value
+            countryBox.ResetText();//reseting the field value
+            stateBox.ResetText();//reseting the field value
             maleButton.Checked = true;//reseting the field value
         }
 
@@ -150,6 +155,8 @@ namespace StudentReg
             user.Columns.Add("PhoneNumber", typeof(long));//adding columns to the user datatable
             user.Columns.Add("Country", typeof(string));//adding columns to the user datatable
             user.Columns.Add("State", typeof(string));//adding columns to the user datatable
+            user.Columns.Add("Locality", typeof(string));//adding columns to the user datatable
+            user.Columns.Add("EmailID", typeof(string));//adding columns to the user datatable
         }
 
         /*this function bind the states to the combobox*/
@@ -275,6 +282,8 @@ namespace StudentReg
                 nameBox.Text = row.Cells["Name"].Value.ToString();//setting the values to data fields
                 numberBox.Text = row.Cells["PhoneNumber"].Value.ToString();//setting the values to data fields
                 countryBox.Text = row.Cells["Country"].Value.ToString();//setting the values to data fields
+                locBox.Text = row.Cells["Locality"].Value.ToString();//setting the values to data fields
+                emailBox.Text = row.Cells["EmailID"].Value.ToString();//setting the values to data fields
                 bindState();//calling the function to bind states when load button is clicked
 
                 stateBox.Text = row.Cells["State"].Value.ToString();//setting the values to data fields
@@ -303,6 +312,7 @@ namespace StudentReg
         {
             bindState();//state is binded according to the selected country index
         }
+        
 
 
         /*this function will be triggered when the update button is clicked*/
@@ -313,6 +323,8 @@ namespace StudentReg
             user.Rows[rowIndex]["PhoneNumber"] = numberBox.Text;
             user.Rows[rowIndex]["Country"] = countryBox.Text;
             user.Rows[rowIndex]["State"] = stateBox.Text;
+            user.Rows[rowIndex]["EmailID"] = stateBox.Text;
+            user.Rows[rowIndex]["Locality"] = stateBox.Text;
 
             //string radioValue = getRadioValue();
             //MessageBox.Show(radioValue);
