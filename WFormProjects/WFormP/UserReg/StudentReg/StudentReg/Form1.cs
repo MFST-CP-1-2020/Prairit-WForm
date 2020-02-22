@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace StudentReg
 {
-    
+
     public partial class Form1 : Form
     {
         DataTable user = new DataTable();//user's datatable
@@ -20,7 +20,7 @@ namespace StudentReg
         DataTable country = new DataTable();//country's datatable
 
         int rowIndex, columnIndex;
-        
+
         /*constructor to initialize the windows form*/
         public Form1()
         {
@@ -34,7 +34,7 @@ namespace StudentReg
         private void button1_Click(object sender, EventArgs e)
         {
             bindGrid();//this function call will bind the grid
-            
+
             clearEntries();//this function call will reset the values of the fields in form
             state.Clear();//emptying the datatable of state
 
@@ -56,7 +56,7 @@ namespace StudentReg
             {
                 row["PhoneNumber"] = numberBox.Text;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("Input should be an integer");
                 row["PhoneNumber"] = 0;
@@ -71,11 +71,11 @@ namespace StudentReg
             addLoadButton();//load button will be added to the grid
 
             addDeleteButton();//delete button will be added to the grid
-            
+
         }
         /*this function will create a new column for load button*/
         void addLoadButton()
-        {            
+        {
             DataGridViewButtonColumn ButtonColumn = new DataGridViewButtonColumn();//new datagrid buttoncolumn is defined
             ButtonColumn.Name = "Load column";//attributes of the button are set
             ButtonColumn.Text = "Load";//attributes of the button are set
@@ -167,7 +167,6 @@ namespace StudentReg
 
             /*
             DataRow stateRow = state.NewRow();
-
             stateRow["id"] = 1;
             stateRow["Name"] = "Uttar Pradesh";
             state.Rows.Add(stateRow);
@@ -195,10 +194,11 @@ namespace StudentReg
             int index = countryBox.SelectedIndex;//reading the selected index
             switch (index)//switching on the value of index
             {
-                case 0: state.Rows.Add(1, "Uttar Pradesh");//if the selected option is india
-                        state.Rows.Add(2, "Haryana");
-                        state.Rows.Add(3, "Punjab");
-                        state.Rows.Add(4, "Karnataka");
+                case 0:
+                    state.Rows.Add(1, "Uttar Pradesh");//if the selected option is india
+                    state.Rows.Add(2, "Haryana");
+                    state.Rows.Add(3, "Punjab");
+                    state.Rows.Add(4, "Karnataka");
                     break;
                 case 1:
                     state.Rows.Add(1, "Bumthang");//if the selected option is bhutan
@@ -224,15 +224,15 @@ namespace StudentReg
         /*this function will be called at form's loading to add columns to the state datatable*/
         void addColumnsToState()
         {
-                state.Columns.Add("id", typeof(int));
-                state.Columns.Add("Name", typeof(string));
+            state.Columns.Add("id", typeof(int));
+            state.Columns.Add("Name", typeof(string));
         }
 
         /*this function will bind the country datatable to the combobox*/
         void bindCountry()
         {
             getCountry();
-            
+
             /*
             DataRow countryRow = country.NewRow();
             
@@ -252,7 +252,7 @@ namespace StudentReg
             countryBox.DisplayMember = "Name";//setting the display members of the country combobox
             countryBox.ValueMember = "id";//setting the value members of the country combobox
             countryBox.DataSource = country;//binding the datasource of countrybox to country
-            
+
         }
 
         /*this function will add the names of the countries to the datatable*/
@@ -288,7 +288,7 @@ namespace StudentReg
 
                 stateBox.Text = row.Cells["State"].Value.ToString();//setting the values to data fields
 
-                if (row.Cells["Gender"].Value.ToString()=="Male")//conditions for setting the values of radiobuttons 
+                if (row.Cells["Gender"].Value.ToString() == "Male")//conditions for setting the values of radiobuttons 
                 {
                     maleButton.Checked = true;
                 }
@@ -301,18 +301,18 @@ namespace StudentReg
                 //bindState();//calling the function to bind states when load button is clicked
             }
 
-            else if(columnIndex == 0)//if the delete button is clicked
+            else if (columnIndex == 0)//if the delete button is clicked
             {
                 dataGridView1.Rows.RemoveAt(rowIndex);//delete the current rowdataGridView1.CurrentRow.Index
             }
         }
-        
+
         /*this function will be triggered when a a value in the combobox is selected*/
         private void countryBox_DropDownClosed(object sender, EventArgs e)
         {
             bindState();//state is binded according to the selected country index
         }
-        
+
 
 
         /*this function will be triggered when the update button is clicked*/

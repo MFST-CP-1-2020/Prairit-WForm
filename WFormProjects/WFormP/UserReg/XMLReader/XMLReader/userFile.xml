@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Table>
+  <User>
+	<fName>Prairit</fName>
+	<lName>Verma</lName>
+	<Gender>Male</Gender>
+	<EmailID>prairitp@mindfiresolutions.com</EmailID>
+	<PhoneNumber>9717245991</PhoneNumber>
+	<State>Uttar Pradesh</State>
+	<Country>India</Country>
+  </User>
+  <User>
+	<fName>Rachit</fName>
+	<lName>Jain</lName>
+	<Gender>Male</Gender>
+	<EmailID>rachitj@mindfiresolutions.com</EmailID>
+	<PhoneNumber>1234567890</PhoneNumber>
+	<State>Bihar</State>
+	<Country>India</Country>
+  </User>
+  <User>
+	<fName>Tao</fName>
+	<lName>Han</lName>
+	<Gender>Female</Gender>
+	<EmailID>taoh@mindfiresolutions.com</EmailID>
+	<PhoneNumber>1234567890</PhoneNumber>
+	<State>Xian</State>
+	<Country>China</Country>
+  </User>
+  <User>
+	<fName>Drake</fName>
+	<lName>Remore</lName>
+	<Gender>Male</Gender>
+	<EmailID>draker@#mindfiresolutions.com</EmailID>
+	<PhoneNumber>12345678980</PhoneNumber>
+	<State>Califonia</State>
+	<Country>USA</Country>
+  </User>
+</Table>
