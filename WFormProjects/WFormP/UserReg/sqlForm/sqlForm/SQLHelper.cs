@@ -118,5 +118,25 @@ namespace sqlForm
             }
             return dt;
         }
+
+        /// <summary>
+        /// This function will add the SQLParameters to the passes command object 
+        /// </summary>
+        public void AddParameter(SqlCommand command, string name, SqlDbType type, ParameterDirection direction, object value)
+        {
+            try
+            {
+                SqlParameter parameter = new SqlParameter();
+                parameter.ParameterName = name;
+                parameter.SqlDbType = type;
+                parameter.Direction = direction;
+                parameter.Value = value;
+                command.Parameters.Add(parameter);
+            }
+            catch
+            {
+                MessageBox.Show("Failed to add parameters");
+            }
+        }
     }
 }

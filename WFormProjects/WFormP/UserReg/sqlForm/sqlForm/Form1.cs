@@ -25,7 +25,7 @@ namespace sqlForm
         #region "Functions"
 
         /// <summary>
-        /// Constructor for initializing form conpoents
+        /// Constructor for initializing form components
         /// </summary>
         public SQLDataForm()
         {
@@ -79,24 +79,8 @@ namespace sqlForm
         /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
-            CreateColumnsForDataGrid();
         }
-
-        /// <summary>
-        /// This function will add columns in the datagrid
-        /// </summary>
-        void CreateColumnsForDataGrid()
-        {
-            result.Columns.Add("StudentID");
-            result.Columns.Add("First Name");
-            result.Columns.Add("Last Name");
-            result.Columns.Add("Phone Number");
-            result.Columns.Add("EmailID");
-            result.Columns.Add("Gender");
-            result.Columns.Add("State");
-            result.Columns.Add("Country");
-        }
-
+        
         /// <summary>
         /// This function  is triggered upon clicking the delete button
         /// </summary>

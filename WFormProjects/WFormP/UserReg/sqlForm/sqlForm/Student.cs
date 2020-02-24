@@ -90,34 +90,20 @@ namespace sqlForm
 
             helper.CloseConnection();
             MessageBox.Show("Row updated successfully");
-        }
-
-
-        /// <summary>
-        /// This function will add the SQLParameters to the passes command object 
-        /// </summary>
-        private void AddParameter(SqlCommand command, string name, SqlDbType type, ParameterDirection direction, object value)
-        {
-            SqlParameter parameter = new SqlParameter();
-            parameter.ParameterName = name;
-            parameter.SqlDbType = type;
-            parameter.Direction = direction;
-            parameter.Value = value;
-            command.Parameters.Add(parameter);
-        }
+        }       
 
         /// <summary>
         /// This function will add the SQLParameters required for Insert stored procedure
         /// </summary>
         private void ParameterForInsert(SqlCommand command)
         {
-            AddParameter(command, "@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, this.firstName);
-            AddParameter(command, "@LastName", SqlDbType.NVarChar, ParameterDirection.Input, this.lastName);
-            AddParameter(command, "@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, this.phoneNumber);
-            AddParameter(command, "@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, this.emailID);
-            AddParameter(command, "@Gender", SqlDbType.NVarChar, ParameterDirection.Input, this.Gender);
-            AddParameter(command, "@State", SqlDbType.NVarChar, ParameterDirection.Input, this.State);
-            AddParameter(command, "@Country", SqlDbType.NVarChar, ParameterDirection.Input, this.Country);
+            helper.AddParameter(command, "@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, this.firstName);
+            helper.AddParameter(command, "@LastName", SqlDbType.NVarChar, ParameterDirection.Input, this.lastName);
+            helper.AddParameter(command, "@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, this.phoneNumber);
+            helper.AddParameter(command, "@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, this.emailID);
+            helper.AddParameter(command, "@Gender", SqlDbType.NVarChar, ParameterDirection.Input, this.Gender);
+            helper.AddParameter(command, "@State", SqlDbType.NVarChar, ParameterDirection.Input, this.State);
+            helper.AddParameter(command, "@Country", SqlDbType.NVarChar, ParameterDirection.Input, this.Country);
         }
 
         /// <summary>
@@ -125,7 +111,7 @@ namespace sqlForm
         /// </summary>
         private void ParameterForDelete(SqlCommand command)
         {
-            AddParameter(command, "@StudentID", SqlDbType.Int, ParameterDirection.Input, this.StudentID);
+            helper.AddParameter(command, "@StudentID", SqlDbType.Int, ParameterDirection.Input, this.StudentID);
         }
 
         /// <summary>
@@ -133,14 +119,14 @@ namespace sqlForm
         /// </summary>
         private void ParameterForUpdate(SqlCommand command)
         {
-            AddParameter(command, "@StudentID", SqlDbType.Int, ParameterDirection.Input, this.StudentID);
-            AddParameter(command, "@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, this.firstName);
-            AddParameter(command, "@LastName", SqlDbType.NVarChar, ParameterDirection.Input, this.lastName);
-            AddParameter(command, "@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, this.phoneNumber);
-            AddParameter(command, "@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, this.emailID);
-            AddParameter(command, "@Gender", SqlDbType.NVarChar, ParameterDirection.Input, this.Gender);
-            AddParameter(command, "@State", SqlDbType.NVarChar, ParameterDirection.Input, this.State);
-            AddParameter(command, "@Country", SqlDbType.NVarChar, ParameterDirection.Input, this.Country);
+            helper.AddParameter(command, "@StudentID", SqlDbType.Int, ParameterDirection.Input, this.StudentID);
+            helper.AddParameter(command, "@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, this.firstName);
+            helper.AddParameter(command, "@LastName", SqlDbType.NVarChar, ParameterDirection.Input, this.lastName);
+            helper.AddParameter(command, "@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, this.phoneNumber);
+            helper.AddParameter(command, "@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, this.emailID);
+            helper.AddParameter(command, "@Gender", SqlDbType.NVarChar, ParameterDirection.Input, this.Gender);
+            helper.AddParameter(command, "@State", SqlDbType.NVarChar, ParameterDirection.Input, this.State);
+            helper.AddParameter(command, "@Country", SqlDbType.NVarChar, ParameterDirection.Input, this.Country);
         }
 
 
