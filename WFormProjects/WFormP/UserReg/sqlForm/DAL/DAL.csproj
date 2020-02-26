@@ -40,11 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Employee.cs" />
+    <Compile Include="EmployeeDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLHelper.cs" />
-    <Compile Include="Student.cs" />
+    <Compile Include="StudentDAL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{c43a1b4d-4f61-49de-83cd-5375ff4334c7}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,13 +9,13 @@ using System.Data.SqlClient;
 namespace DAL
 {
     /// <summary>
-    /// This class contains the properties of the Student 
+    /// This class contains the properties of the Employee
     /// </summary>
-    public class Student
+    public class EmployeeDAL
     {
         #region "Properties"
 
-        public int StudentID { get; set; }
+        public int EmployeeID { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public long phoneNumber { get; set; }
@@ -35,7 +35,7 @@ namespace DAL
         /// </summary>
         public DataTable Get()
         {
-            DataTable res = helper.SqlDataAdapter(true, "DisplayRows");
+            DataTable res = helper.SqlDataAdapter(true, "EmployeeDisplayRows");
             return res;
         }
 
@@ -46,19 +46,19 @@ namespace DAL
         {
 
             ParameterForInsert();
-            int result = helper.ExecuteScalar(true, "ScalarInsertRow");
+            int result = helper.ExecuteScalar(true, "EmployeeScalarInsertRow");
             //helper.parameters.Clear();
 
             //MessageBox.Show("Row inserted at index " + result.ToString());
         }
 
         /// <summary>
-        /// This function will delete the row at the desired StudentID
+        /// This function will delete the row at the desired EmployeeID
         /// </summary>
         public void Delete()
         {
             ParameterForDelete();
-            helper.ExecuteNonQuery(true, "DeleteRow");
+            helper.ExecuteNonQuery(true, "EmployeeDeleteRow");
             //helper.parameters.Clear();
 
             //MessageBox.Show("Row deleted successfully");
@@ -70,7 +70,7 @@ namespace DAL
         public void Update()
         {
             ParameterForUpdate();
-            helper.ExecuteNonQuery(true, "UpdateRow");
+            helper.ExecuteNonQuery(true, "EmployeeUpdateRow");
             //helper.parameters.Clear();
 
             //MessageBox.Show("Row updated successfully");
@@ -95,7 +95,7 @@ namespace DAL
         /// </summary>
         private void ParameterForDelete()
         {
-            helper.AddParameter("@StudentID", SqlDbType.Int, ParameterDirection.Input, this.StudentID);
+            helper.AddParameter("@EmployeeID", SqlDbType.Int, ParameterDirection.Input, this.EmployeeID);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace DAL
         /// </summary>
         private void ParameterForUpdate()
         {
-            helper.AddParameter("@StudentID", SqlDbType.Int, ParameterDirection.Input, this.StudentID);
+            helper.AddParameter("@EmployeeID", SqlDbType.Int, ParameterDirection.Input, this.EmployeeID);
             helper.AddParameter("@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, this.firstName);
             helper.AddParameter("@LastName", SqlDbType.NVarChar, ParameterDirection.Input, this.lastName);
             helper.AddParameter("@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, this.phoneNumber);

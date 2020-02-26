@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using DAL;
+using DTO;
 
 namespace BAL
 {
     /// <summary>
     /// This class contains the properties of the Employee
     /// </summary>
-    public class Employee
+    public class EmployeeBAL
     {
         #region "Properties"
-
+        /*
         public int EmployeeID { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
@@ -23,7 +24,7 @@ namespace BAL
         public string emailID { get; set; }
         public string Gender { get; set; }
         public string State { get; set; }
-        public string Country { get; set; }
+        public string Country { get; set; }*/
 
         SQLHelper helper = new SQLHelper();
 
@@ -43,10 +44,10 @@ namespace BAL
         /// <summary>
         /// This function will add rows in the SQL datatable
         /// </summary>
-        public int AddBL()
+        public int AddBL(EmployeeDTO empdto)
         {
 
-            ParameterForInsert();
+            ParameterForInsert(empdto);
             int result = helper.ExecuteScalar(true, "EmployeeScalarInsertRow");
             return result;
             //helper.parameters.Clear();
@@ -57,9 +58,9 @@ namespace BAL
         /// <summary>
         /// This function will delete the row at the desired StudentID
         /// </summary>
-        public void DeleteBL()
+        public void DeleteBL(EmployeeDTO empdto)
         {
-            ParameterForDelete();
+            ParameterForDelete(empdto);
             helper.ExecuteNonQuery(true, "EmployeeDeleteRow");
             //helper.parameters.Clear();
 
@@ -69,9 +70,9 @@ namespace BAL
         /// <summary>
         /// This function will update the entries in the SQL table to the inserted vales
         /// </summary>
-        public void UpdateBL()
+        public void UpdateBL(EmployeeDTO empdto)
         {
-            ParameterForUpdate();
+            ParameterForUpdate(empdto);
             helper.ExecuteNonQuery(true, "EmployeeUpdateRow");
             //helper.parameters.Clear();
 
@@ -81,38 +82,38 @@ namespace BAL
         /// <summary>
         /// This function will add the SQLParameters required for Insert stored procedure
         /// </summary>
-        private void ParameterForInsert()
+        private void ParameterForInsert(EmployeeDTO empdto)
         {
-            helper.AddParameter("@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, this.firstName);
-            helper.AddParameter("@LastName", SqlDbType.NVarChar, ParameterDirection.Input, this.lastName);
-            helper.AddParameter("@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, this.phoneNumber);
-            helper.AddParameter("@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, this.emailID);
-            helper.AddParameter("@Gender", SqlDbType.NVarChar, ParameterDirection.Input, this.Gender);
-            helper.AddParameter("@State", SqlDbType.NVarChar, ParameterDirection.Input, this.State);
-            helper.AddParameter("@Country", SqlDbType.NVarChar, ParameterDirection.Input, this.Country);
+            helper.AddParameter("@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, empdto.firstName);
+            helper.AddParameter("@LastName", SqlDbType.NVarChar, ParameterDirection.Input, empdto.lastName);
+            helper.AddParameter("@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, empdto.phoneNumber);
+            helper.AddParameter("@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, empdto.emailID);
+            helper.AddParameter("@Gender", SqlDbType.NVarChar, ParameterDirection.Input, empdto.Gender);
+            helper.AddParameter("@State", SqlDbType.NVarChar, ParameterDirection.Input, empdto.State);
+            helper.AddParameter("@Country", SqlDbType.NVarChar, ParameterDirection.Input, empdto.Country);
         }
 
         /// <summary>
         /// This function will add the SQLParameter for the Delete Stored Procedure
         /// </summary>
-        private void ParameterForDelete()
+        private void ParameterForDelete(EmployeeDTO empdto)
         {
-            helper.AddParameter("@EmployeeID", SqlDbType.Int, ParameterDirection.Input, this.EmployeeID);
+            helper.AddParameter("@EmployeeID", SqlDbType.Int, ParameterDirection.Input, empdto.EmployeeID);
         }
 
         /// <summary>
         /// This function will add the SQLParameter for the Update Stored Procedure
         /// </summary>
-        private void ParameterForUpdate()
+        private void ParameterForUpdate(EmployeeDTO empdto)
         {
-            helper.AddParameter("@EmployeeID", SqlDbType.Int, ParameterDirection.Input, this.EmployeeID);
-            helper.AddParameter("@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, this.firstName);
-            helper.AddParameter("@LastName", SqlDbType.NVarChar, ParameterDirection.Input, this.lastName);
-            helper.AddParameter("@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, this.phoneNumber);
-            helper.AddParameter("@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, this.emailID);
-            helper.AddParameter("@Gender", SqlDbType.NVarChar, ParameterDirection.Input, this.Gender);
-            helper.AddParameter("@State", SqlDbType.NVarChar, ParameterDirection.Input, this.State);
-            helper.AddParameter("@Country", SqlDbType.NVarChar, ParameterDirection.Input, this.Country);
+            helper.AddParameter("@EmployeeID", SqlDbType.Int, ParameterDirection.Input, empdto.EmployeeID);
+            helper.AddParameter("@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, empdto.firstName);
+            helper.AddParameter("@LastName", SqlDbType.NVarChar, ParameterDirection.Input, empdto.lastName);
+            helper.AddParameter("@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, empdto.phoneNumber);
+            helper.AddParameter("@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, empdto.emailID);
+            helper.AddParameter("@Gender", SqlDbType.NVarChar, ParameterDirection.Input, empdto.Gender);
+            helper.AddParameter("@State", SqlDbType.NVarChar, ParameterDirection.Input, empdto.State);
+            helper.AddParameter("@Country", SqlDbType.NVarChar, ParameterDirection.Input, empdto.Country);
         }
 
 
