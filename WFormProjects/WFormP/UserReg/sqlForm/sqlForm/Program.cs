@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace sqlForm
+namespace PAL
 {
     static class Program
     {
@@ -16,7 +16,8 @@ namespace sqlForm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SQLDataForm());
+            //Application.Run(new SQLDataForm());
+            Application.Run(new EmployeeForm());
         }
     }
 }

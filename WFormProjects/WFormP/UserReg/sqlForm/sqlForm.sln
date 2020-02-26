@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sqlForm", "sqlForm\sqlForm.csproj", "{D01F61D7-7A40-44D9-8BF4-15332B4927FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAL", "sqlForm\PAL.csproj", "{D01F61D7-7A40-44D9-8BF4-15332B4927FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{F05E5845-AF34-4072-885C-E3F3620BE2BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BAL", "BAL\BAL.csproj", "{51C4DAF6-CCC7-4163-9F5E-E2C8E9AD91D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{D01F61D7-7A40-44D9-8BF4-15332B4927FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D01F61D7-7A40-44D9-8BF4-15332B4927FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D01F61D7-7A40-44D9-8BF4-15332B4927FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F05E5845-AF34-4072-885C-E3F3620BE2BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F05E5845-AF34-4072-885C-E3F3620BE2BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F05E5845-AF34-4072-885C-E3F3620BE2BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F05E5845-AF34-4072-885C-E3F3620BE2BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51C4DAF6-CCC7-4163-9F5E-E2C8E9AD91D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51C4DAF6-CCC7-4163-9F5E-E2C8E9AD91D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51C4DAF6-CCC7-4163-9F5E-E2C8E9AD91D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51C4DAF6-CCC7-4163-9F5E-E2C8E9AD91D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -37,7 +37,7 @@ namespace sqlForm
         /// </summary>
         private void addButton_Click(object sender, EventArgs e)
         {
-            std = new Student();
+            //std = new Student();
             std = ReadDataIntoStudent();
             std.Add();
             ClearEntriesInForm();
@@ -57,7 +57,7 @@ namespace sqlForm
         /// </summary>
         Student ReadDataIntoStudent()
         {
-            std = new Student();
+            //std = new Student();
             std.firstName = txtBoxFirstName.Text;
             std.lastName = txtBoxLastName.Text;
             try
