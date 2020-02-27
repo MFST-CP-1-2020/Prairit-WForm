@@ -16,17 +16,10 @@ namespace BAL
     public class EmployeeBAL
     {
         #region "Properties"
-        /*
-        public int EmployeeID { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public long phoneNumber { get; set; }
-        public string emailID { get; set; }
-        public string Gender { get; set; }
-        public string State { get; set; }
-        public string Country { get; set; }*/
 
-        SQLHelper helper = new SQLHelper();
+        //SQLHelper helper = new SQLHelper();
+
+        //EmployeeDAL empdal = new EmployeeDAL();
 
         #endregion
 
@@ -37,7 +30,8 @@ namespace BAL
         /// </summary>
         public DataTable GetBL()
         {
-            DataTable res = helper.SqlDataAdapter(true, "EmployeeDisplayRows");
+            EmployeeDAL empdal1 = new EmployeeDAL();
+            DataTable res=empdal1.GetDL();
             return res;
         }
 
@@ -46,13 +40,9 @@ namespace BAL
         /// </summary>
         public int AddBL(EmployeeDTO empdto)
         {
-
-            ParameterForInsert(empdto);
-            int result = helper.ExecuteScalar(true, "EmployeeScalarInsertRow");
+            EmployeeDAL empdal2 = new EmployeeDAL();
+            int result=empdal2.AddDL(empdto);
             return result;
-            //helper.parameters.Clear();
-
-            //MessageBox.Show("Row inserted at index " + result.ToString());
         }
 
         /// <summary>
@@ -60,11 +50,8 @@ namespace BAL
         /// </summary>
         public void DeleteBL(EmployeeDTO empdto)
         {
-            ParameterForDelete(empdto);
-            helper.ExecuteNonQuery(true, "EmployeeDeleteRow");
-            //helper.parameters.Clear();
-
-            //MessageBox.Show("Row deleted successfully");
+            EmployeeDAL empdal3 = new EmployeeDAL();
+            empdal3.DeleteDL(empdto);
         }
 
         /// <summary>
@@ -72,51 +59,9 @@ namespace BAL
         /// </summary>
         public void UpdateBL(EmployeeDTO empdto)
         {
-            ParameterForUpdate(empdto);
-            helper.ExecuteNonQuery(true, "EmployeeUpdateRow");
-            //helper.parameters.Clear();
-
-            //MessageBox.Show("Row updated successfully");
+            EmployeeDAL empdal4 = new EmployeeDAL();
+            empdal4.UpdateDL(empdto);
         }
-
-        /// <summary>
-        /// This function will add the SQLParameters required for Insert stored procedure
-        /// </summary>
-        private void ParameterForInsert(EmployeeDTO empdto)
-        {
-            helper.AddParameter("@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, empdto.firstName);
-            helper.AddParameter("@LastName", SqlDbType.NVarChar, ParameterDirection.Input, empdto.lastName);
-            helper.AddParameter("@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, empdto.phoneNumber);
-            helper.AddParameter("@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, empdto.emailID);
-            helper.AddParameter("@Gender", SqlDbType.NVarChar, ParameterDirection.Input, empdto.Gender);
-            helper.AddParameter("@State", SqlDbType.NVarChar, ParameterDirection.Input, empdto.State);
-            helper.AddParameter("@Country", SqlDbType.NVarChar, ParameterDirection.Input, empdto.Country);
-        }
-
-        /// <summary>
-        /// This function will add the SQLParameter for the Delete Stored Procedure
-        /// </summary>
-        private void ParameterForDelete(EmployeeDTO empdto)
-        {
-            helper.AddParameter("@EmployeeID", SqlDbType.Int, ParameterDirection.Input, empdto.EmployeeID);
-        }
-
-        /// <summary>
-        /// This function will add the SQLParameter for the Update Stored Procedure
-        /// </summary>
-        private void ParameterForUpdate(EmployeeDTO empdto)
-        {
-            helper.AddParameter("@EmployeeID", SqlDbType.Int, ParameterDirection.Input, empdto.EmployeeID);
-            helper.AddParameter("@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, empdto.firstName);
-            helper.AddParameter("@LastName", SqlDbType.NVarChar, ParameterDirection.Input, empdto.lastName);
-            helper.AddParameter("@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, empdto.phoneNumber);
-            helper.AddParameter("@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, empdto.emailID);
-            helper.AddParameter("@Gender", SqlDbType.NVarChar, ParameterDirection.Input, empdto.Gender);
-            helper.AddParameter("@State", SqlDbType.NVarChar, ParameterDirection.Input, empdto.State);
-            helper.AddParameter("@Country", SqlDbType.NVarChar, ParameterDirection.Input, empdto.Country);
-        }
-
-
         #endregion
     }
 }

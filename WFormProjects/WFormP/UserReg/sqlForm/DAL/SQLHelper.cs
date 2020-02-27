@@ -14,20 +14,21 @@ namespace DAL
     public class SQLHelper
     {
         #region "Properties"
-        private string connectionString;
-        List<SqlParameter> parameters;
+        public string connectionString= @"Server=PRAIRIT-PC\SQLEXPRESS;Database=TestDB;User Id = sa; Password=mindfire@1";
+            
+        List<SqlParameter> parameters= new List<SqlParameter>();
         #endregion
 
         #region"Functions"
         /// <summary>
         /// Constructor to initialize the connection string
         /// </summary>
-        public SQLHelper()
-        {
+        //public SQLHelper()
+        //{
 
-            connectionString = @"Server=PRAIRIT-PC\SQLEXPRESS;Database=TestDB;User Id = sa; Password=mindfire@1";
-            parameters = new List<SqlParameter>();
-        }
+            //connectionString = @"Server=PRAIRIT-PC\SQLEXPRESS;Database=TestDB;User Id = sa; Password=mindfire@1";
+           // parameters = new List<SqlParameter>();
+        //}
 
         /// <summary>
         /// This function will execute the Stored Procedure by using ExecuteNonQuery

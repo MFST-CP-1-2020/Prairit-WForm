@@ -16,17 +16,10 @@ namespace BAL
     public class StudentBAL
     {
         #region "Properties"
-        /*
-        public int StudentID { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public long phoneNumber { get; set; }
-        public string emailID { get; set; }
-        public string Gender { get; set; }
-        public string State { get; set; }
-        public string Country { get; set; }*/
 
-        SQLHelper helper = new SQLHelper();
+        //SQLHelper helper = new SQLHelper();
+
+        StudentDAL stddal = new StudentDAL();
 
         #endregion
 
@@ -37,8 +30,10 @@ namespace BAL
         /// </summary>
         public DataTable GetBL()
         {
-            DataTable res = helper.SqlDataAdapter(true, "DisplayRows");
-            return res;
+            //DataTable res = helper.SqlDataAdapter(true, "DisplayRows");
+            //return res;
+            DataTable result=stddal.GetDL();
+            return result;
         }
 
         /// <summary>
@@ -46,13 +41,11 @@ namespace BAL
         /// </summary>
         public int AddBL(StudentDTO stddto)
         {
-
-            ParameterForInsert(stddto);
-            int result = helper.ExecuteScalar(true, "ScalarInsertRow");
+            //ParameterForInsert(stddto);
+            //int result = helper.ExecuteScalar(true, "ScalarInsertRow");
+            //return result;
+            int result = stddal.AddDL(stddto);
             return result;
-            //helper.parameters.Clear();
-
-            //MessageBox.Show("Row inserted at index " + result.ToString());
         }
 
         /// <summary>
@@ -60,11 +53,9 @@ namespace BAL
         /// </summary>
         public void DeleteBL(StudentDTO stddto)
         {
-            ParameterForDelete(stddto);
-            helper.ExecuteNonQuery(true, "DeleteRow");
-            //helper.parameters.Clear();
-
-            //MessageBox.Show("Row deleted successfully");
+            //ParameterForDelete(stddto);
+            //helper.ExecuteNonQuery(true, "DeleteRow");
+            stddal.DeleteDL(stddto);
         }
 
         /// <summary>
@@ -72,51 +63,10 @@ namespace BAL
         /// </summary>
         public void UpdateBL(StudentDTO stddto)
         {
-            ParameterForUpdate(stddto);
-            helper.ExecuteNonQuery(true, "UpdateRow");
-            //helper.parameters.Clear();
-
-            //MessageBox.Show("Row updated successfully");
+            //ParameterForUpdate(stddto);
+            //helper.ExecuteNonQuery(true, "UpdateRow");
+            stddal.UpdateDL(stddto);
         }
-
-        /// <summary>
-        /// This function will add the SQLParameters required for Insert stored procedure
-        /// </summary>
-        private void ParameterForInsert(StudentDTO stddto)
-        {
-            helper.AddParameter("@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, stddto.firstName);
-            helper.AddParameter("@LastName", SqlDbType.NVarChar, ParameterDirection.Input, stddto.lastName);
-            helper.AddParameter("@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, stddto.phoneNumber);
-            helper.AddParameter("@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, stddto.emailID);
-            helper.AddParameter("@Gender", SqlDbType.NVarChar, ParameterDirection.Input, stddto.Gender);
-            helper.AddParameter("@State", SqlDbType.NVarChar, ParameterDirection.Input, stddto.State);
-            helper.AddParameter("@Country", SqlDbType.NVarChar, ParameterDirection.Input, stddto.Country);
-        }
-
-        /// <summary>
-        /// This function will add the SQLParameter for the Delete Stored Procedure
-        /// </summary>
-        private void ParameterForDelete(StudentDTO stddto)
-        {
-            helper.AddParameter("@StudentID", SqlDbType.Int, ParameterDirection.Input, stddto.StudentID);
-        }
-
-        /// <summary>
-        /// This function will add the SQLParameter for the Update Stored Procedure
-        /// </summary>
-        private void ParameterForUpdate(StudentDTO stddto)
-        {
-            helper.AddParameter("@StudentID", SqlDbType.Int, ParameterDirection.Input, stddto.StudentID);
-            helper.AddParameter("@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, stddto.firstName);
-            helper.AddParameter("@LastName", SqlDbType.NVarChar, ParameterDirection.Input, stddto.lastName);
-            helper.AddParameter("@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, stddto.phoneNumber);
-            helper.AddParameter("@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, stddto.emailID);
-            helper.AddParameter("@Gender", SqlDbType.NVarChar, ParameterDirection.Input, stddto.Gender);
-            helper.AddParameter("@State", SqlDbType.NVarChar, ParameterDirection.Input, stddto.State);
-            helper.AddParameter("@Country", SqlDbType.NVarChar, ParameterDirection.Input, stddto.Country);
-        }
-
-
         #endregion
     }
 }
