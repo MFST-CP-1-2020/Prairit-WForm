@@ -16,87 +16,90 @@ namespace DAL
     {
         #region "Properties"
 
-        SQLHelper helper = new SQLHelper();
+        TestDBEntities context = new TestDBEntities();
 
         #endregion
 
         #region "Functions"
+        
 
         /// <summary>
         /// This function will use SQLDataAdapter and return the DataTable
         /// </summary>
         public DataTable GetDL()
         {
-            DataTable res = helper.SqlDataAdapter(true, "DisplayRows");
-            return res;
+            DataTable dt = addColumns();
+            var dto = from d in context.Students select d;
+            foreach(var rowobject in dto)
+            {
+                DataRow datarow = dt.NewRow();
+                datarow["StudentID"] = rowobject.StudentID;
+                datarow["First Name"] = rowobject.FirstName;
+                datarow["Last Name"] = rowobject.LastName;
+                datarow["Phone Number"] = rowobject.PhoneNumber;
+                datarow["Email ID"] = rowobject.EmailID;
+                datarow["Gender"] = rowobject.Gender;
+                datarow["State"] = rowobject.State;
+                datarow["Country"] = rowobject.Country;
+                dt.Rows.Add(datarow);
+            }
+            return dt;
+        }
+        /// <summary>
+        /// This function create columns in a datatable and returns this data table
+        /// </summary>
+        /// <returns></returns>
+        private DataTable addColumns()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("StudentID");
+            dt.Columns.Add("First Name");
+            dt.Columns.Add("Last Name");
+            dt.Columns.Add("Phone Number");
+            dt.Columns.Add("Email ID");
+            dt.Columns.Add("Gender");
+            dt.Columns.Add("State");
+            dt.Columns.Add("Country");
+            return dt;
         }
 
         /// <summary>
         /// This function will add rows in the SQL datatable
         /// </summary>
-        public int AddDL(StudentDTO stddto)
+        public int AddDL(Student std)
         {
-            ParameterForInsert(stddto);
-            int result = helper.ExecuteScalar(true, "ScalarInsertRow");
-            return result;
+            var dto=context.Students.Add(std);
+            context.SaveChanges();
+            return dto.StudentID;
         }
 
         /// <summary>
         /// This function will delete the row at the desired StudentID
         /// </summary>
-        public void DeleteDL(StudentDTO stddto)
+        public void DeleteDL(Student std)
         {
-            ParameterForDelete(stddto);
-            helper.ExecuteNonQuery(true, "DeleteRow");
+            var dto = (from d in context.Students where d.StudentID == std.StudentID select d).Single();
+            context.Students.Remove(dto);
+            context.SaveChanges();
         }
 
         /// <summary>
         /// This function will update the entries in the SQL table to the inserted vales
         /// </summary>
-        public void UpdateDL(StudentDTO stddto)
+        public void UpdateDL(Student std)
         {
-            ParameterForUpdate(stddto);
-            helper.ExecuteNonQuery(true, "UpdateRow");
+            Student dto = (from d in context.Students where d.StudentID == std.StudentID select d).Single();
+            dto.StudentID = std.StudentID;
+            dto.FirstName = std.FirstName;
+            dto.LastName = std.LastName;
+            dto.PhoneNumber = std.PhoneNumber;
+            dto.EmailID = std.EmailID;
+            dto.Gender = std.Gender;
+            dto.State = std.State;
+            dto.Country = std.Country;
+            context.SaveChanges();
+
         }
-
-        /// <summary>
-        /// This function will add the SQLParameters required for Insert stored procedure
-        /// </summary>
-        private void ParameterForInsert(StudentDTO stddto)
-        {
-            helper.AddParameter("@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, stddto.firstName);
-            helper.AddParameter("@LastName", SqlDbType.NVarChar, ParameterDirection.Input, stddto.lastName);
-            helper.AddParameter("@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, stddto.phoneNumber);
-            helper.AddParameter("@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, stddto.emailID);
-            helper.AddParameter("@Gender", SqlDbType.NVarChar, ParameterDirection.Input, stddto.Gender);
-            helper.AddParameter("@State", SqlDbType.NVarChar, ParameterDirection.Input, stddto.State);
-            helper.AddParameter("@Country", SqlDbType.NVarChar, ParameterDirection.Input, stddto.Country);
-        }
-
-        /// <summary>
-        /// This function will add the SQLParameter for the Delete Stored Procedure
-        /// </summary>
-        private void ParameterForDelete(StudentDTO stddto)
-        {
-            helper.AddParameter("@StudentID", SqlDbType.Int, ParameterDirection.Input, stddto.StudentID);
-        }
-
-        /// <summary>
-        /// This function will add the SQLParameter for the Update Stored Procedure
-        /// </summary>
-        private void ParameterForUpdate(StudentDTO stddto)
-        {
-            helper.AddParameter("@StudentID", SqlDbType.Int, ParameterDirection.Input, stddto.StudentID);
-            helper.AddParameter("@FirstName", SqlDbType.NVarChar, ParameterDirection.Input, stddto.firstName);
-            helper.AddParameter("@LastName", SqlDbType.NVarChar, ParameterDirection.Input, stddto.lastName);
-            helper.AddParameter("@PhoneNumber", SqlDbType.NVarChar, ParameterDirection.Input, stddto.phoneNumber);
-            helper.AddParameter("@EmailID", SqlDbType.NVarChar, ParameterDirection.Input, stddto.emailID);
-            helper.AddParameter("@Gender", SqlDbType.NVarChar, ParameterDirection.Input, stddto.Gender);
-            helper.AddParameter("@State", SqlDbType.NVarChar, ParameterDirection.Input, stddto.State);
-            helper.AddParameter("@Country", SqlDbType.NVarChar, ParameterDirection.Input, stddto.Country);
-        }
-
-
         #endregion
     }
 }

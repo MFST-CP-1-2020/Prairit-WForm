@@ -39,33 +39,33 @@ namespace BAL
         /// <summary>
         /// This function will add rows in the SQL datatable
         /// </summary>
-        public int AddBL(StudentDTO stddto)
+        public int AddBL(Student std)
         {
             //ParameterForInsert(stddto);
             //int result = helper.ExecuteScalar(true, "ScalarInsertRow");
             //return result;
-            int result = stddal.AddDL(stddto);
+            int result = stddal.AddDL(std);
             return result;
         }
 
         /// <summary>
         /// This function will delete the row at the desired StudentID
         /// </summary>
-        public void DeleteBL(StudentDTO stddto)
+        public void DeleteBL(Student std)
         {
             //ParameterForDelete(stddto);
             //helper.ExecuteNonQuery(true, "DeleteRow");
-            stddal.DeleteDL(stddto);
+            stddal.DeleteDL(std);
         }
 
         /// <summary>
         /// This function will update the entries in the SQL table to the inserted vales
         /// </summary>
-        public void UpdateBL(StudentDTO stddto)
+        public void UpdateBL(Student std)
         {
             //ParameterForUpdate(stddto);
             //helper.ExecuteNonQuery(true, "UpdateRow");
-            stddal.UpdateDL(stddto);
+            stddal.UpdateDL(std);
         }
         #endregion
     }

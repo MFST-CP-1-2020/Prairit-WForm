@@ -21,9 +21,9 @@ namespace PAL
         #region"Properties"
         DataTable result = new DataTable();
 
-        StudentBAL std = new StudentBAL();
+        StudentBAL stdbal = new StudentBAL();
 
-        StudentDTO stddto = new StudentDTO();
+        Student std = new Student();
         #endregion
 
         #region "Functions"
@@ -42,8 +42,8 @@ namespace PAL
         private void addButton_Click(object sender, EventArgs e)
         {
             //std = new Student();
-            stddto = ReadDataIntoStudent();
-            int result=std.AddBL(stddto);
+            std = ReadDataIntoStudent();
+            int result=stdbal.AddBL(std);
             MessageBox.Show("Row inserted at row number:" + result);
             ClearEntriesInForm();
         }
@@ -53,30 +53,30 @@ namespace PAL
         /// </summary>
         void BindGrid()
         {
-            result = std.GetBL();
+            result = stdbal.GetBL();
             dataGridViewForSQL.DataSource = result;
         }
 
         /// <summary>
         /// This function will read data from winform and store it in the object
         /// </summary>
-        StudentDTO ReadDataIntoStudent()
+        Student ReadDataIntoStudent()
         {
             //std = new Student();
-            stddto.firstName = txtBoxFirstName.Text;
-            stddto.lastName = txtBoxLastName.Text;
+            std.FirstName = txtBoxFirstName.Text;
+            std.LastName = txtBoxLastName.Text;
             try
             {
-                stddto.StudentID = int.Parse(txtBoxID.Text);
-                stddto.phoneNumber = long.Parse(txtBoxPhoneNumber.Text);
+                std.StudentID = int.Parse(txtBoxID.Text);
             }
             catch (Exception) { }
-            stddto.emailID = txtBoxEmailID.Text;
-            stddto.Gender= txtBoxGender.Text;
-            stddto.State = txtBoxState.Text;
-            stddto.Country = txtBoxCountry.Text;
+            std.PhoneNumber = txtBoxPhoneNumber.Text;
+            std.EmailID = txtBoxEmailID.Text;
+            std.Gender= txtBoxGender.Text;
+            std.State = txtBoxState.Text;
+            std.Country = txtBoxCountry.Text;
 
-            return stddto;
+            return std;
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace PAL
         private void deleteButton_Click(object sender, EventArgs e)
         {
             ReadDataIntoStudent();
-            std.DeleteBL(stddto);
+            stdbal.DeleteBL(std);
             ClearEntriesInForm();
             MessageBox.Show("Row deleted");
         }
@@ -111,7 +111,7 @@ namespace PAL
         private void updateButton_Click(object sender, EventArgs e)
         {
             ReadDataIntoStudent();
-            std.UpdateBL(stddto);
+            stdbal.UpdateBL(std);
             ClearEntriesInForm();
             MessageBox.Show("Row updated successfully");
         }
