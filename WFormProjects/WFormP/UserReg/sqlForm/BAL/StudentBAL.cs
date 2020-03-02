@@ -7,64 +7,69 @@ using System.Data;
 using System.Data.SqlClient;
 using DAL;
 using DTO;
+using BAL.Mapper;
 
 namespace BAL
 {
     /// <summary>
-    /// This class contains the properties of the Student 
+    /// This class contains the business logic for Data manipulation in the SQL table 
     /// </summary>
     public class StudentBAL
     {
         #region "Properties"
-
-        //SQLHelper helper = new SQLHelper();
-
+        
         StudentDAL stddal = new StudentDAL();
+
+        StudentMapper mapper = new StudentMapper();
 
         #endregion
 
         #region "Functions"
 
         /// <summary>
-        /// This function will use SQLDataAdapter and return the DataTable
+        /// This function will have the business logic for displaying the data
         /// </summary>
-        public DataTable GetBL()
+        /// <returns>A list of StudentDTO objects</returns>
+        public List<StudentDTO> GetBL()
         {
-            //DataTable res = helper.SqlDataAdapter(true, "DisplayRows");
-            //return res;
-            DataTable result=stddal.GetDL();
-            return result;
+            List<Student> ListSTD=stddal.GetDL();
+            List<StudentDTO> ListDTO=new List<StudentDTO>();
+            foreach(var std in ListSTD)
+            {
+                ListDTO.Add(mapper.ToDtoObj(std));
+            }
+            return ListDTO;
         }
 
         /// <summary>
-        /// This function will add rows in the SQL datatable
+        /// This function will have the business logic for adding a row in SQL table
         /// </summary>
-        public int AddBL(Student std)
+        /// <param name="stddto">A StudentDTO object with values to be added</param>
+        /// <returns>Primary Key of the inserted row</returns>
+        public int AddBL(StudentDTO stddto)
         {
-            //ParameterForInsert(stddto);
-            //int result = helper.ExecuteScalar(true, "ScalarInsertRow");
-            //return result;
+            Student std=mapper.ToModelObj(stddto);
             int result = stddal.AddDL(std);
             return result;
         }
 
         /// <summary>
-        /// This function will delete the row at the desired StudentID
+        /// This function will have the business logic for deleting the row in SQL table
         /// </summary>
-        public void DeleteBL(Student std)
+        /// <param name="stddto">An object of the StudentDTO class with StudentID of the row to be deleted </param>
+        public void DeleteBL(StudentDTO stddto)
         {
-            //ParameterForDelete(stddto);
-            //helper.ExecuteNonQuery(true, "DeleteRow");
+            Student std = mapper.ToModelObj(stddto);
             stddal.DeleteDL(std);
         }
 
         /// <summary>
-        /// This function will update the entries in the SQL table to the inserted vales
+        /// This function will have the business logic for updating the entries in the SQL table to the inserted vales
         /// </summary>
-        public void UpdateBL(Student std)
+        /// <param name="stddto">A StudentDTO object with updated values</param>
+        public void UpdateBL(StudentDTO stddto)
         {
-            //ParameterForUpdate(stddto);
-            //helper.ExecuteNonQuery(true, "UpdateRow");
+            Student std=mapper.ToModelObj(stddto);
             stddal.UpdateDL(std);
         }
         #endregion

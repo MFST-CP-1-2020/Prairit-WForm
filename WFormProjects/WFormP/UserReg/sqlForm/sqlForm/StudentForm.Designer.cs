@@ -1,6 +1,6 @@
 ﻿namespace PAL
 {
-    partial class SQLDataForm
+    partial class StudentForm
     {
         /// <summary>
         /// Required designer variable.
@@ -272,7 +272,6 @@
             this.Controls.Add(this.lblFirstName);
             this.Name = "SQLDataForm";
             this.Text = "Student Registration Form";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewForSQL)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

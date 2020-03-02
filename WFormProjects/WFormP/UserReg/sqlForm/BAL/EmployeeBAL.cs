@@ -7,19 +7,20 @@ using System.Data;
 using System.Data.SqlClient;
 using DAL;
 using DTO;
+using BAL.Mapper;
 
 namespace BAL
 {
     /// <summary>
-    /// This class contains the properties of the Employee
+    /// This class contains the busniess logic for data manipulation in SQL table
     /// </summary>
     public class EmployeeBAL
     {
         #region "Properties"
+       
+        EmployeeDAL empdal = new EmployeeDAL();
 
-        //SQLHelper helper = new SQLHelper();
-
-        //EmployeeDAL empdal = new EmployeeDAL();
+        EmployeeMapper mapper = new EmployeeMapper();
 
         #endregion
 
@@ -28,38 +29,47 @@ namespace BAL
         /// <summary>
         /// This function will use SQLDataAdapter and return the DataTable
         /// </summary>
-        public DataTable GetBL()
+        /// <returns>A list of EmployeeDTO objects</returns>
+        public List<EmployeeDTO> GetBL()
         {
-            EmployeeDAL empdal = new EmployeeDAL();
-            DataTable res=empdal.GetDL();
-            return res;
+            List<Employee> ListEMP=empdal.GetDL();
+            List<EmployeeDTO> ListDTO = new List<EmployeeDTO>();
+            foreach(var employee in ListEMP)
+            {
+                ListDTO.Add(mapper.ToDtoObj(employee));
+            }
+            return ListDTO;
         }
 
         /// <summary>
         /// This function will add rows in the SQL datatable
         /// </summary>
-        public int AddBL(Employee emp)
+        /// <param name="empdto">Object if EmployeeDTO object</param>
+        /// <returns>Primary key of the inserted row</returns>
+        public int AddBL(EmployeeDTO empdto)
         {
-            EmployeeDAL empdal = new EmployeeDAL();
+            Employee emp = mapper.ToModelObj(empdto);
             int result=empdal.AddDL(emp);
             return result;
         }
 
         /// <summary>
-        /// This function will delete the row at the desired StudentID
+        /// This function will delete the row at the desired EmployeeID
         /// </summary>
-        public void DeleteBL(Employee emp)
+        /// <param name="empdto">EmployeeDTO object with EmployeeID</param>
+        public void DeleteBL(EmployeeDTO empdto)
         {
-            EmployeeDAL empdal = new EmployeeDAL();
+            Employee emp = mapper.ToModelObj(empdto);
             empdal.DeleteDL(emp);
         }
 
         /// <summary>
         /// This function will update the entries in the SQL table to the inserted vales
         /// </summary>
-        public void UpdateBL(Employee emp)
+        /// <param name="empdto">Object of EmployeeDTO with updated values</param>
+        public void UpdateBL(EmployeeDTO empdto)
         {
-            EmployeeDAL empdal = new EmployeeDAL();
+            Employee emp = mapper.ToModelObj(empdto);
             empdal.UpdateDL(emp);
         }
         #endregion

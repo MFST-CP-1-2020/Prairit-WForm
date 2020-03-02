@@ -10,95 +10,69 @@ using DTO;
 namespace DAL
 {
     /// <summary>
-    /// This class contains the properties of the Student 
+    /// This class  uses EF for CRUD operations 
     /// </summary>
     public class StudentDAL
     {
-        #region "Properties"
-
-        TestDBEntities context = new TestDBEntities();
-
-        #endregion
 
         #region "Functions"
-        
+
 
         /// <summary>
-        /// This function will use SQLDataAdapter and return the DataTable
+        /// This function will retrieve a list of the student objects in the SQL table
         /// </summary>
-        public DataTable GetDL()
+        /// <returns>List of student objects</returns>
+        public List<Student> GetDL()
         {
-            DataTable dt = addColumns();
-            var dto = from d in context.Students select d;
-            foreach(var rowobject in dto)
+            List<Student> list;
+            using (TestDBEntities context = new TestDBEntities())
             {
-                DataRow datarow = dt.NewRow();
-                datarow["StudentID"] = rowobject.StudentID;
-                datarow["First Name"] = rowobject.FirstName;
-                datarow["Last Name"] = rowobject.LastName;
-                datarow["Phone Number"] = rowobject.PhoneNumber;
-                datarow["Email ID"] = rowobject.EmailID;
-                datarow["Gender"] = rowobject.Gender;
-                datarow["State"] = rowobject.State;
-                datarow["Country"] = rowobject.Country;
-                dt.Rows.Add(datarow);
+                list=context.Students.ToList();
             }
-            return dt;
-        }
-        /// <summary>
-        /// This function create columns in a datatable and returns this data table
-        /// </summary>
-        /// <returns></returns>
-        private DataTable addColumns()
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("StudentID");
-            dt.Columns.Add("First Name");
-            dt.Columns.Add("Last Name");
-            dt.Columns.Add("Phone Number");
-            dt.Columns.Add("Email ID");
-            dt.Columns.Add("Gender");
-            dt.Columns.Add("State");
-            dt.Columns.Add("Country");
-            return dt;
+            return list;
         }
 
         /// <summary>
-        /// This function will add rows in the SQL datatable
+        /// This function will add rows in the SQL table
         /// </summary>
+        /// <param name="std">Student object which contains data to be added</param>
+        /// <returns>primary key of the inserted row</returns>
         public int AddDL(Student std)
         {
-            var dto=context.Students.Add(std);
-            context.SaveChanges();
-            return dto.StudentID;
+            int id;
+            using (TestDBEntities context = new TestDBEntities())
+            {
+                var dto = context.Students.Add(std);
+                context.SaveChanges();
+                id = dto.StudentID;
+            }
+            return id;
         }
 
         /// <summary>
         /// This function will delete the row at the desired StudentID
         /// </summary>
+        /// <param name="std">Primary key of the row to be deleted</param>
         public void DeleteDL(Student std)
         {
-            var dto = (from d in context.Students where d.StudentID == std.StudentID select d).Single();
-            context.Students.Remove(dto);
-            context.SaveChanges();
+            using (TestDBEntities context = new TestDBEntities())
+            {
+                context.Entry(std).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
+            }
         }
 
         /// <summary>
         /// This function will update the entries in the SQL table to the inserted vales
         /// </summary>
+        /// <param name="std">Student object with updated values</param>
         public void UpdateDL(Student std)
         {
-            Student dto = (from d in context.Students where d.StudentID == std.StudentID select d).Single();
-            dto.StudentID = std.StudentID;
-            dto.FirstName = std.FirstName;
-            dto.LastName = std.LastName;
-            dto.PhoneNumber = std.PhoneNumber;
-            dto.EmailID = std.EmailID;
-            dto.Gender = std.Gender;
-            dto.State = std.State;
-            dto.Country = std.Country;
-            context.SaveChanges();
-
+            using (TestDBEntities context = new TestDBEntities())
+            {
+                context.Entry(std).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
         }
         #endregion
     }

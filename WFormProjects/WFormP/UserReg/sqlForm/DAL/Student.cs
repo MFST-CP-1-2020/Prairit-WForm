@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DTO
+namespace DAL
 {
     using System;
     using System.Collections.Generic;

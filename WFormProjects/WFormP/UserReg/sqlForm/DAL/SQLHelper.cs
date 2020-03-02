@@ -14,7 +14,7 @@ namespace DAL
     public class SQLHelper
     {
         #region "Properties"
-        public string connectionString;
+        private string connectionString;
 
         List<SqlParameter> parameters;
         #endregion

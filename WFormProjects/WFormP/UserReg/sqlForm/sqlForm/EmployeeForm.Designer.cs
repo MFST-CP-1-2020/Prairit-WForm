@@ -271,7 +271,6 @@
             this.Controls.Add(this.lblFirstName);
             this.Name = "EmployeeForm";
             this.Text = "EmployeeForm";
-            this.Load += new System.EventHandler(this.EmployeeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewForSQL)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

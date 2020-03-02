@@ -10,103 +10,68 @@ using DTO;
 namespace DAL
 {
     /// <summary>
-    /// This class contains the properties of the Employee
+    /// This class interacts with the database and perform the desired CRUD operations
     /// </summary>
     public class EmployeeDAL
     {
-        #region "Properties"
-        /*
-        public int EmployeeID { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public long phoneNumber { get; set; }
-        public string emailID { get; set; }
-        public string Gender { get; set; }
-        public string State { get; set; }
-        public string Country { get; set; }*/
-
-        TestDBEntities context = new TestDBEntities();
-
-        #endregion
 
         #region "Functions"
 
-
         /// <summary>
-        /// This function will use SQLDataAdapter and return the DataTable
+        /// This function will get the list of employees from the SQL table
         /// </summary>
-        public DataTable GetDL()
+        /// <returns>List of student objects</returns>
+        public List<Employee> GetDL()
         {
-            DataTable dt = addColumns();
-            var dto = from d in context.Employees select d;
-            foreach (var rowobject in dto)
+            List<Employee> list;
+            using (TestDBEntities context = new TestDBEntities())
             {
-                DataRow datarow = dt.NewRow();
-                datarow["EmployeeID"] = rowobject.EmployeeID;
-                datarow["First Name"] = rowobject.FirstName;
-                datarow["Last Name"] = rowobject.LastName;
-                datarow["Phone Number"] = rowobject.PhoneNumber;
-                datarow["Email ID"] = rowobject.EmailID;
-                datarow["Gender"] = rowobject.Gender;
-                datarow["State"] = rowobject.State;
-                datarow["Country"] = rowobject.Country;
-                dt.Rows.Add(datarow);
+                list = context.Employees.ToList();
             }
-            return dt;
-        }
-        /// <summary>
-        /// This function create columns in a datatable and returns this data table
-        /// </summary>
-        /// <returns></returns>
-        private DataTable addColumns()
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("EmployeeID");
-            dt.Columns.Add("First Name");
-            dt.Columns.Add("Last Name");
-            dt.Columns.Add("Phone Number");
-            dt.Columns.Add("Email ID");
-            dt.Columns.Add("Gender");
-            dt.Columns.Add("State");
-            dt.Columns.Add("Country");
-            return dt;
+            return list;
         }
 
         /// <summary>
-        /// This function will add rows in the SQL datatable
+        /// This function will add rows in the SQL table
         /// </summary>
+        /// <param name="emp">Object with values of the row to be added</param>
+        /// <returns>Primary key of the inserted row</returns>
         public int AddDL(Employee emp)
         {
-            var dto = context.Employees.Add(emp);
-            context.SaveChanges();
-            return dto.EmployeeID;
+            int id;
+            using (TestDBEntities context = new TestDBEntities())
+            {
+                var dto = context.Employees.Add(emp);
+                context.SaveChanges();
+                id = dto.EmployeeID;
+            }
+            return id;
         }
 
         /// <summary>
-        /// This function will delete the row at the desired StudentID
+        /// This function will delete the row at the desired EmployeeID
         /// </summary>
+        /// <param name="emp">Object with primary key of the row to be deleted</param>
         public void DeleteDL(Employee emp)
         {
-            var dto = (from d in context.Employees where d.EmployeeID == emp.EmployeeID select d).Single();
-            context.Employees.Remove(dto);
-            context.SaveChanges();
+            using (TestDBEntities context = new TestDBEntities())
+            {
+                context.Entry(emp).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
+            }
         }
 
         /// <summary>
-        /// This function will update the entries in the SQL table to the inserted vales
+        /// This function will update the entries in the SQL table to the inserted values
         /// </summary>
+        /// <param name="emp">Object with updated values of the column in Employee object</param>
         public void UpdateDL(Employee emp)
         {
-            Employee dto = (from d in context.Employees where d.EmployeeID == emp.EmployeeID select d).Single();
-            dto.EmployeeID = emp.EmployeeID;
-            dto.FirstName = emp.FirstName;
-            dto.LastName = emp.LastName;
-            dto.PhoneNumber = emp.PhoneNumber;
-            dto.EmailID = emp.EmailID;
-            dto.Gender = emp.Gender;
-            dto.State = emp.State;
-            dto.Country = emp.Country;
-            context.SaveChanges();
+            using (TestDBEntities context = new TestDBEntities())
+            {
+                context.Entry(emp).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
         }
         #endregion
     }
